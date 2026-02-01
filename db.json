@@ -1,4 +1,46 @@
 {
+  "menu": [
+    {
+      "id": "50",
+      "img": "../img/imgs/food1.png",
+      "name": "Burgers",
+      "category": "burgers",
+      "description": "Burgers Deliss",
+      "price": 3000
+    },
+    {
+      "id": "51",
+      "img": "../img/imgs/food4.png",
+      "name": "Drinks",
+      "category": "drinks",
+      "description": "Taste gug coca",
+      "price": 3000
+    },
+    {
+      "id": "52",
+      "img": "../img/imgs/food2.png",
+      "name": "Pizza",
+      "category": "pizza",
+      "description": "Pizza rica dsdl",
+      "price": 3000
+    },
+    {
+      "id": "53",
+      "img": "../img/imgs/food5.png",
+      "name": "Sides",
+      "category": "sides",
+      "description": "Me comi una salchipapa",
+      "price": 3000
+    },
+    {
+      "id": "54",
+      "img": "../img/imgs/food3.png",
+      "name": "Desserts",
+      "category": "desserts",
+      "description": "Donas si se señor donas",
+      "price": 3000
+    }
+  ],
   "usuarios": [
     {
       "id": "1",
@@ -11,91 +53,12 @@
       "password": 123
     },
     {
-      "id": "1",
-      "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
-      "name": "user1",
-      "email": "user@gmail.com",
-      "phone": 39493309,
-      "rol": "user",
-      "user": "user1@",
-      "password": 123
-    },
-    {
-      "id": "15aa",
-      "name": "duvan",
-      "email": "duvan@gmail.com",
-      "user": "duvan",
-      "password": "123"
-    },
-    {
-      "id": "dcdb",
-      "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
-      "name": "1",
-      "email": "1",
-      "user": "1",
-      "password": "1"
-    },
-    {
-      "id": "bf34",
-      "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
-      "name": "2",
-      "email": "2",
-      "user": "2",
-      "password": "2",
-      "rol": "user"
-    },
-    {
       "id": "9a40",
       "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
       "name": "2",
       "email": "2",
       "user": "2",
       "password": "2",
-      "rol": "user"
-    },
-    {
-      "id": "b4f1",
-      "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
-      "name": "23",
-      "email": "23",
-      "user": "23",
-      "password": "23",
-      "rol": "user"
-    },
-    {
-      "id": "53f0",
-      "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
-      "name": "4",
-      "email": "4",
-      "user": "4",
-      "password": "4",
-      "rol": "user"
-    },
-    {
-      "id": "cad5",
-      "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
-      "name": "7",
-      "email": "7",
-      "user": "7",
-      "password": "7",
-      "rol": "user"
-    },
-    {
-      "id": "fd72",
-      "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
-      "name": "2",
-      "email": "2",
-      "user": "2",
-      "password": "2",
-      "rol": "user"
-    },
-    {
-      "id": "a293",
-      "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
-      "name": "d",
-      "email": "d",
-      "user": "d",
-      "password": "d",
       "rol": "user"
     }
   ],
@@ -113,11 +76,82 @@
   ],
   "orders": [
     {
-      "id": "12",
+      "id": "3755",
       "status": "pending",
-      "products": [],
-      "total": 0,
+      "products": [
+        {
+          "id": 52,
+          "img": "../img/imgs/food2.png",
+          "name": "Pizza",
+          "category": "pizza",
+          "description": "Pizza rica dsdl",
+          "price": 3000,
+          "quantity": 1
+        }
+      ],
+      "total": 3240,
       "idUser": 1
+    },
+    {
+      "id": "a9e3",
+      "status": "pending",
+      "products": [
+        {
+          "id": 52,
+          "img": "../img/imgs/food2.png",
+          "name": "Pizza",
+          "category": "pizza",
+          "description": "Pizza rica dsdl",
+          "price": 3000,
+          "quantity": 1
+        }
+      ],
+      "total": 3240,
+      "idUser": 1
+    },
+    {
+      "id": "d7b4",
+      "idUser": 1,
+      "products": [
+        {
+          "id": 51,
+          "img": "../img/imgs/food4.png",
+          "name": "Drinks",
+          "category": "drinks",
+          "description": "Taste gug coca",
+          "price": 3000,
+          "quantity": 1
+        },
+        {
+          "id": 52,
+          "img": "../img/imgs/food2.png",
+          "name": "Pizza",
+          "category": "pizza",
+          "description": "Pizza rica dsdl",
+          "price": 3000,
+          "quantity": 1
+        },
+        {
+          "id": 54,
+          "img": "../img/imgs/food3.png",
+          "name": "Desserts",
+          "category": "desserts",
+          "description": "Donas si se señor donas",
+          "price": 3000,
+          "quantity": 1
+        },
+        {
+          "id": 53,
+          "img": "../img/imgs/food5.png",
+          "name": "Sides",
+          "category": "sides",
+          "description": "Me comi una salchipapa",
+          "price": 3000,
+          "quantity": 1
+        }
+      ],
+      "total": 12960,
+      "status": "pending"
     }
   ]
 }

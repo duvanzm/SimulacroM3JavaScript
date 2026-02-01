@@ -1,133 +1,136 @@
-// Variables globales
+/* =========================
+   VARIABLES GLOBALES
+========================= */
 const formIn = document.getElementById("form-in");
 const formUp = document.getElementById("form-up");
 const upS = document.getElementById("up");
 const inS = document.getElementById("in");
 const msg = document.querySelector(".alert-acceso");
-const msgR = document.querySelector(".register")
+const msgR = document.querySelector(".register");
 
-const urlUsers = "http://localhost:3000/usuarios";   
+const urlUsers = "http://localhost:3000/usuarios";
 const urlAdmin = "http://localhost:3000/admin";
 
+/* =========================
+   LOGIN USER + ADMIN
+========================= */
 const loginUsersAdmin = async () => {
   try {
     const respUser = await fetch(urlUsers);
     const respAdmin = await fetch(urlAdmin);
 
     if (!respUser.ok || !respAdmin.ok) {
-      throw new Error(`Error HTTP: ${respUser.status} ${respAdmin.status}`);
+      throw new Error("Error cargando usuarios");
     }
 
     const dataUser = await respUser.json();
     const dataAdmin = await respAdmin.json();
+
     const allData = [...dataUser, ...dataAdmin];
 
-    console.log(allData);
-
-    // Funciones para mostrar/ocultar formularios 
-   
+    /* =========================
+       MOSTRAR / OCULTAR FORMS
+    ========================= */
     window.singIn = function () {
       formUp.classList.add("d-none");
       formIn.classList.remove("d-none");
-      formIn.classList.add("d-block");
 
-      // Limpiar inputs y mensaje
       formIn.user.value = "";
       formIn.password.value = "";
       formIn.rol.value = "user";
       msg.innerHTML = "";
-    }
+    };
 
     window.singUp = function () {
       formIn.classList.add("d-none");
       formUp.classList.remove("d-none");
-      formUp.classList.add("d-block");
 
-      // Limpiar inputs y mensaje
-      formUp.querySelectorAll("input").forEach(input => input.value = "");
-      msg.innerHTML = "";
-    }
+      formUp.querySelectorAll("input").forEach(i => (i.value = ""));
+      msgR.innerHTML = "";
+    };
 
-    //  Eventos para cambiar entre login y registro 
-    upS.addEventListener("click", (e) => {
+    upS.addEventListener("click", e => {
       e.preventDefault();
       singUp();
     });
 
-    inS.addEventListener("click", (e) => {
+    inS.addEventListener("click", e => {
       e.preventDefault();
       singIn();
     });
 
-    //  Evento de login 
-    formIn.addEventListener("submit", (event) => {
-      event.preventDefault();
+    /* =========================
+       EVENTO LOGIN
+    ========================= */
+    formIn.addEventListener("submit", e => {
+      e.preventDefault();
 
-      const inpusUsers = new Map([
-        ["user", formIn.user.value.trim()],
-        ["password", formIn.password.value.trim()],
-        ["rol", formIn.rol.value.trim()]
-      ]);
+      const userValue = formIn.user.value.trim();
+      const passwordValue = formIn.password.value.trim();
+      const rolValue = formIn.rol.value.trim();
 
-      msg.innerHTML = "";
-
-      // Validación campos vacíos
-      for (let [key, value] of inpusUsers.entries()) {
-        if (!value) {
-          msg.innerHTML = `<span class="text-warning">El campo ${key} es obligatorio</span>`;
-          return;
-        }
+      if (!userValue || !passwordValue || !rolValue) {
+        msg.innerHTML =
+          `<span class="text-warning">Todos los campos son obligatorios</span>`;
+        return;
       }
 
-      // Validación de usuario
       const acceso = allData.find(
-        (user) =>
-          user.user === inpusUsers.get("user") &&
-          user.password === inpusUsers.get("password") &&
-          user.rol === inpusUsers.get("rol")
+        u =>
+          u.user === userValue &&
+          u.password == passwordValue &&
+          u.rol === rolValue
       );
 
-      if (acceso) {
-        sessionStorage.setItem("loginUser", "true");
-        msg.innerHTML = `<span class="text-success">Acceso correcto, redirigiendo...</span>`;
-
-        formIn.user.value = "";
-        formIn.password.value = "";
-
-        setTimeout(() => {
-          window.location.href = "home.html"; // tu página de destino real
-        }, 1000);
-      } else {
-        msg.innerHTML = `<span class="text-danger">Usuario, contraseña o rol incorrecto</span>`;
+      if (!acceso) {
+        msg.innerHTML =
+          `<span class="text-danger">Usuario, contraseña o rol incorrecto</span>`;
+        return;
       }
+
+      /* =========================
+         LOGIN CORRECTO
+      ========================= */
+      sessionStorage.setItem("login", "true");
+      sessionStorage.setItem("rol", acceso.rol);
+      sessionStorage.setItem("userId", acceso.id);
+
+      msg.innerHTML =
+        `<span class="text-success">Acceso correcto, redirigiendo...</span>`;
+
+      setTimeout(() => {
+        if (acceso.rol === "admin") {
+          window.location.href = "./admin/dashboard.html";
+        } else {
+          window.location.href = "./user/home.html";
+        }
+      }, 1000);
     });
-
-    //  Evento de login 
-
-    return allData, dataUser, dataAdmin
   } catch (error) {
-    console.error("Error de petición:", error);
+    console.error("Error:", error);
   }
 };
 
+/* =========================
+   REGISTRO DE USUARIOS
+========================= */
+const loginRegisterUser = async () => {
+  let allUsers = [];
 
-const loginRegisterUser = async function() {
-
-  // Traer todos los usuarios antes de registrar
-  let allData = [];
   try {
     const resp = await fetch(urlUsers);
-    if (!resp.ok) throw new Error(`HTTP error! status: ${resp.status}`);
-    allData = await resp.json();
+    if (!resp.ok) throw new Error("Error cargando usuarios");
+    allUsers = await resp.json();
   } catch (error) {
-    console.error("Error cargando usuarios:", error);
+    console.error(error);
   }
 
-  formUp.addEventListener("submit", async function(e){
+  formUp.addEventListener("submit", async e => {
     e.preventDefault();
 
     const newUser = {
-      avatar: "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
+      avatar:
+        "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
       name: formUp.name.value.trim(),
       email: formUp.email.value.trim(),
       user: formUp.user.value.trim(),
@@ -135,49 +138,48 @@ const loginRegisterUser = async function() {
       rol: "user"
     };
 
-    // Validación campos vacíos
     for (let key in newUser) {
       if (!newUser[key]) {
-        msgR.innerHTML = `<span class="text-warning">El campo ${key} es obligatorio</span>`;
+        msgR.innerHTML =
+          `<span class="text-warning">El campo ${key} es obligatorio</span>`;
         return;
       }
     }
 
-    //Validación: verificar si usuario o email ya existe
-    const usuarioExistente = allData.find(u => u.user === newUser.user || u.email === newUser.email);
-    if (usuarioExistente) {
-      msgR.innerHTML = `<span class="text-danger">El usuario o correo ya está registrado</span>`;
+    const exists = allUsers.find(
+      u => u.user === newUser.user || u.email === newUser.email
+    );
+
+    if (exists) {
+      msgR.innerHTML =
+        `<span class="text-danger">Usuario o correo ya registrado</span>`;
       return;
     }
 
     try {
       const register = await fetch(urlUsers, {
         method: "POST",
-        headers: { 'Content-Type': 'application/json' },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newUser)
       });
 
-      if (!register.ok) throw new Error(`HTTP error! status: ${register.status}`);
+      if (!register.ok) throw new Error("Error registrando usuario");
 
-      const rep = await register.json();
+      msgR.innerHTML =
+        `<span class="text-success">Registro exitoso</span>`;
 
-      if (rep) {
-        msgR.innerHTML = `<span class="text-success">Se registró exitosamente</span>`;
-        setTimeout(() => {
-          window.location.href = "index.html";
-        }, 1000);
-      }
-
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 1000);
     } catch (error) {
-      console.error("Error de petición:", error);
-      msgR.innerHTML = `<span class="text-danger">Error al registrar: ${error.message}</span>`;
+      msgR.innerHTML =
+        `<span class="text-danger">Error al registrar</span>`;
     }
-
   });
-
 };
 
-
+/* =========================
+   INIT
+========================= */
 loginRegisterUser();
 loginUsersAdmin();
-export default loginUsersAdmin;
