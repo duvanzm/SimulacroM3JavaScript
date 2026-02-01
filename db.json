@@ -1,0 +1,123 @@
+{
+  "usuarios": [
+    {
+      "id": "1",
+      "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
+      "name": "user001",
+      "email": "user@gmail.com",
+      "phone": 39493309,
+      "rol": "user",
+      "user": "user1@",
+      "password": 123
+    },
+    {
+      "id": "1",
+      "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
+      "name": "user1",
+      "email": "user@gmail.com",
+      "phone": 39493309,
+      "rol": "user",
+      "user": "user1@",
+      "password": 123
+    },
+    {
+      "id": "15aa",
+      "name": "duvan",
+      "email": "duvan@gmail.com",
+      "user": "duvan",
+      "password": "123"
+    },
+    {
+      "id": "dcdb",
+      "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
+      "name": "1",
+      "email": "1",
+      "user": "1",
+      "password": "1"
+    },
+    {
+      "id": "bf34",
+      "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
+      "name": "2",
+      "email": "2",
+      "user": "2",
+      "password": "2",
+      "rol": "user"
+    },
+    {
+      "id": "9a40",
+      "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
+      "name": "2",
+      "email": "2",
+      "user": "2",
+      "password": "2",
+      "rol": "user"
+    },
+    {
+      "id": "b4f1",
+      "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
+      "name": "23",
+      "email": "23",
+      "user": "23",
+      "password": "23",
+      "rol": "user"
+    },
+    {
+      "id": "53f0",
+      "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
+      "name": "4",
+      "email": "4",
+      "user": "4",
+      "password": "4",
+      "rol": "user"
+    },
+    {
+      "id": "cad5",
+      "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
+      "name": "7",
+      "email": "7",
+      "user": "7",
+      "password": "7",
+      "rol": "user"
+    },
+    {
+      "id": "fd72",
+      "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
+      "name": "2",
+      "email": "2",
+      "user": "2",
+      "password": "2",
+      "rol": "user"
+    },
+    {
+      "id": "a293",
+      "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
+      "name": "d",
+      "email": "d",
+      "user": "d",
+      "password": "d",
+      "rol": "user"
+    }
+  ],
+  "admin": [
+    {
+      "id": "2",
+      "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
+      "name": "user2",
+      "email": "admin@gmail.com",
+      "phone": 394933309,
+      "rol": "admin",
+      "user": "admin@",
+      "password": 123
+    }
+  ],
+  "orders": [
+    {
+      "id": "12",
+      "status": "pending",
+      "products": [],
+      "total": 0,
+      "idUser": 1
+    }
+  ]
+}
