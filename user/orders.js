@@ -1,29 +1,49 @@
+// ============================
+// CONFIG API
+// ============================
 const API_USERS = "http://localhost:3000/usuarios";
 const API_ORDERS = "http://localhost:3000/orders";
 
-// ===== ELEMENTOS =====
+// ============================
+// ELEMENTOS
+// ============================
 const ordersSection = document.getElementById("orders");
 const ordersContainer = document.querySelector("#orders .col-md-8");
 const userContainer = document.querySelector("#orders .col-md-4");
 
-// ===== USUARIO LOGUEADO =====
-const loggedUserId = Number(sessionStorage.getItem("userId")) || 1;
+// ============================
+// USUARIO LOGUEADO (STRING)
+// ============================
+const loggedUserId = sessionStorage.getItem("userId");
 
-// ===== OBTENER USUARIO =====
+// ============================
+// VALIDAR LOGIN
+// ============================
+if (!loggedUserId) {
+  console.error("No hay usuario logueado");
+}
+
+// ============================
+// OBTENER USUARIO
+// ============================
 async function getUser() {
   const res = await fetch(API_USERS);
   const users = await res.json();
-  return users.find(user => Number(user.id) === loggedUserId);
+  return users.find(user => user.id === loggedUserId);
 }
 
-// ===== OBTENER ÓRDENES =====
+// ============================
+// OBTENER ÓRDENES DEL USUARIO
+// ============================
 async function getOrders() {
   const res = await fetch(API_ORDERS);
   const orders = await res.json();
   return orders.filter(order => order.idUser === loggedUserId);
 }
 
-// ===== BADGE DE ESTADO =====
+// ============================
+// BADGE DE ESTADO
+// ============================
 function statusBadge(status) {
   switch (status) {
     case "pending":
@@ -37,7 +57,9 @@ function statusBadge(status) {
   }
 }
 
-// ===== RENDER HISTORIAL =====
+// ============================
+// RENDER HISTORIAL
+// ============================
 function renderOrdersHistory(orders) {
   let html = `
     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -45,7 +67,7 @@ function renderOrdersHistory(orders) {
     </div>
   `;
 
-  if (orders.length === 0) {
+  if (!orders.length) {
     html += `<p class="text-muted">No orders found</p>`;
   }
 
@@ -72,7 +94,9 @@ function renderOrdersHistory(orders) {
   ordersContainer.innerHTML = html;
 }
 
-// ===== RENDER USUARIO =====
+// ============================
+// RENDER PERFIL USUARIO
+// ============================
 function renderUserProfile(user, orders) {
   userContainer.innerHTML = `
     <div class="card text-center">
@@ -98,16 +122,20 @@ function renderUserProfile(user, orders) {
   `;
 }
 
-// ===== INIT =====
+// ============================
+// INIT
+// ============================
 async function initOrders() {
-  if (!ordersSection) return;
+  if (!ordersSection || !loggedUserId) return;
 
   try {
     const user = await getUser();
+    if (!user) {
+      console.error("Usuario no encontrado en la API");
+      return;
+    }
+
     const orders = await getOrders();
-
-    if (!user) return console.error("Usuario no encontrado");
-
     renderOrdersHistory(orders);
     renderUserProfile(user, orders);
   } catch (error) {

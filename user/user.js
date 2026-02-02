@@ -33,8 +33,10 @@ let menuData = [];
 let cart = [];
 let currentCategory = "all";
 const TAX_RATE = 0.08;
-const USER_ID = Number(sessionStorage.getItem("userId")) || 1;
+const USER_ID = sessionStorage.getItem("userId");
 
+
+console.log(USER_ID)
 // ============================
 // SECCIONES
 // ============================
@@ -47,6 +49,7 @@ const sections = {
 document.querySelectorAll(".section").forEach(link => {
   link.addEventListener("click", e => {
     e.preventDefault();
+
     const section = link.dataset.section;
 
     Object.values(sections).forEach(s => s.classList.add("d-none"));
@@ -57,6 +60,7 @@ document.querySelectorAll(".section").forEach(link => {
     }
   });
 });
+
 
 // ============================
 // LOGOUT
@@ -183,7 +187,7 @@ confirmOrderBtn.addEventListener("click", async () => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      idUser: USER_ID,
+      idUser: USER_ID,   // 👈 STRING "9a40"
       products: cart,
       total,
       status: "pending"
@@ -194,6 +198,7 @@ confirmOrderBtn.addEventListener("click", async () => {
   renderCart();
   alert("Pedido confirmado");
 });
+
 
 // ============================
 fetchMenu();

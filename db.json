@@ -43,20 +43,10 @@
   ],
   "usuarios": [
     {
-      "id": "1",
-      "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
-      "name": "user001",
-      "email": "user@gmail.com",
-      "phone": 39493309,
-      "rol": "user",
-      "user": "user1@",
-      "password": 123
-    },
-    {
       "id": "9a40",
       "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
-      "name": "2",
-      "email": "2",
+      "name": "User 2",
+      "email": "user2@gmail.com",
       "user": "2",
       "password": "2",
       "rol": "user"
@@ -66,21 +56,21 @@
     {
       "id": "2",
       "avatar": "https://i.pinimg.com/originals/31/ec/2c/31ec2ce212492e600b8de27f38846ed7.jpg",
-      "name": "user2",
+      "name": "admin",
       "email": "admin@gmail.com",
       "phone": 394933309,
       "rol": "admin",
-      "user": "admin@",
-      "password": 123
+      "user": "1",
+      "password": 1
     }
   ],
   "orders": [
     {
-      "id": "3755",
-      "status": "pending",
+      "id": "5ad8",
+      "idUser": "9a40",
       "products": [
         {
-          "id": 52,
+          "id": "52",
           "img": "../img/imgs/food2.png",
           "name": "Pizza",
           "category": "pizza",
@@ -90,31 +80,23 @@
         }
       ],
       "total": 3240,
-      "idUser": 1
+      "status": "cancelled"
     },
     {
-      "id": "a9e3",
-      "status": "pending",
+      "id": "4e43",
+      "idUser": "9a40",
       "products": [
         {
-          "id": 52,
-          "img": "../img/imgs/food2.png",
-          "name": "Pizza",
-          "category": "pizza",
-          "description": "Pizza rica dsdl",
+          "id": "50",
+          "img": "../img/imgs/food1.png",
+          "name": "Burgers",
+          "category": "burgers",
+          "description": "Burgers Deliss",
           "price": 3000,
           "quantity": 1
-        }
-      ],
-      "total": 3240,
-      "idUser": 1
-    },
-    {
-      "id": "d7b4",
-      "idUser": 1,
-      "products": [
+        },
         {
-          "id": 51,
+          "id": "51",
           "img": "../img/imgs/food4.png",
           "name": "Drinks",
           "category": "drinks",
@@ -123,34 +105,16 @@
           "quantity": 1
         },
         {
-          "id": 52,
+          "id": "52",
           "img": "../img/imgs/food2.png",
           "name": "Pizza",
           "category": "pizza",
           "description": "Pizza rica dsdl",
           "price": 3000,
           "quantity": 1
-        },
-        {
-          "id": 54,
-          "img": "../img/imgs/food3.png",
-          "name": "Desserts",
-          "category": "desserts",
-          "description": "Donas si se señor donas",
-          "price": 3000,
-          "quantity": 1
-        },
-        {
-          "id": 53,
-          "img": "../img/imgs/food5.png",
-          "name": "Sides",
-          "category": "sides",
-          "description": "Me comi una salchipapa",
-          "price": 3000,
-          "quantity": 1
         }
       ],
-      "total": 12960,
+      "total": 9720,
       "status": "pending"
     }
   ]
