@@ -80,7 +80,7 @@
         }
       ],
       "total": 3240,
-      "status": "cancelled"
+      "status": "delivered"
     },
     {
       "id": "4e43",
@@ -115,7 +115,86 @@
         }
       ],
       "total": 9720,
+      "status": "cancelled"
+    },
+    {
+      "id": "099f",
+      "idUser": "9a40",
+      "products": [
+        {
+          "id": "51",
+          "img": "../img/imgs/food4.png",
+          "name": "Drinks",
+          "category": "drinks",
+          "description": "Taste gug coca",
+          "price": 3000,
+          "quantity": 1
+        },
+        {
+          "id": "52",
+          "img": "../img/imgs/food2.png",
+          "name": "Pizza",
+          "category": "pizza",
+          "description": "Pizza rica dsdl",
+          "price": 3000,
+          "quantity": 1
+        },
+        {
+          "id": "50",
+          "img": "../img/imgs/food1.png",
+          "name": "Burgers",
+          "category": "burgers",
+          "description": "Burgers Deliss",
+          "price": 3000,
+          "quantity": 1
+        },
+        {
+          "id": "54",
+          "img": "../img/imgs/food3.png",
+          "name": "Desserts",
+          "category": "desserts",
+          "description": "Donas si se señor donas",
+          "price": 3000,
+          "quantity": 1
+        },
+        {
+          "id": "53",
+          "img": "../img/imgs/food5.png",
+          "name": "Sides",
+          "category": "sides",
+          "description": "Me comi una salchipapa",
+          "price": 3000,
+          "quantity": 1
+        }
+      ],
+      "total": 16200,
       "status": "pending"
+    },
+    {
+      "id": "11b1",
+      "idUser": "9a40",
+      "products": [
+        {
+          "id": "51",
+          "img": "../img/imgs/food4.png",
+          "name": "Drinks",
+          "category": "drinks",
+          "description": "Taste gug coca",
+          "price": 3000,
+          "quantity": 5
+        },
+        {
+          "id": "54",
+          "img": "../img/imgs/food3.png",
+          "name": "Desserts",
+          "category": "desserts",
+          "description": "Donas si se señor donas",
+          "price": 3000,
+          "quantity": 1
+        }
+      ],
+      "total": 19440,
+      "status": "preparing"
     }
   ]
 }

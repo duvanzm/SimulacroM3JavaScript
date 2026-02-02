@@ -1,19 +1,22 @@
 // ============================
-// VERIFICAR LOGIN
+// 1️⃣ VERIFICAR LOGIN
 // ============================
+
 if (sessionStorage.getItem("login") !== "true") {
   window.location.href = "../index.html";
 }
 
 // ============================
-// API
+// 2️⃣ API (ENDPOINTS)
 // ============================
+
 const urlMenu = "http://localhost:3000/menu";
 const urlOrders = "http://localhost:3000/orders";
 
 // ============================
-// ELEMENTOS
+// 3️⃣ ELEMENTOS DEL DOM
 // ============================
+
 const menuContainer = document.getElementById("menu-container");
 const orderItemsContainer = document.getElementById("order-items");
 const searchInput = document.getElementById("search-input");
@@ -27,19 +30,19 @@ const confirmOrderBtn = document.getElementById("confirm-order");
 const logOut = document.getElementById("logOut");
 
 // ============================
-// ESTADO
+// 4️⃣ ESTADO DE LA APLICACIÓN
 // ============================
+
 let menuData = [];
 let cart = [];
 let currentCategory = "all";
 const TAX_RATE = 0.08;
 const USER_ID = sessionStorage.getItem("userId");
 
+// ============================
+// 5️⃣ SECCIONES DE LA APP
+// ============================
 
-console.log(USER_ID)
-// ============================
-// SECCIONES
-// ============================
 const sections = {
   menu: document.getElementById("menu"),
   orders: document.getElementById("orders"),
@@ -61,18 +64,19 @@ document.querySelectorAll(".section").forEach(link => {
   });
 });
 
+// ============================
+// 6️⃣ LOGOUT
+// ============================
 
-// ============================
-// LOGOUT
-// ============================
 logOut.addEventListener("click", () => {
   sessionStorage.clear();
   location.reload();
 });
 
 // ============================
-// MENÚ
+// 7️⃣ MENÚ
 // ============================
+
 async function fetchMenu() {
   const res = await fetch(urlMenu);
   menuData = await res.json();
@@ -110,8 +114,9 @@ function renderMenu(items) {
 }
 
 // ============================
-// FILTRO
+// 8️⃣ FILTRO Y BÚSQUEDA
 // ============================
+
 filterButtons.forEach(btn => {
   btn.addEventListener("click", e => {
     e.preventDefault();
@@ -126,17 +131,21 @@ function filterAndSearch() {
   let filtered = menuData;
   const q = searchInput.value.toLowerCase();
 
-  if (currentCategory !== "all")
+  if (currentCategory !== "all") {
     filtered = filtered.filter(i => i.category === currentCategory);
+  }
 
-  if (q) filtered = filtered.filter(i => i.name.toLowerCase().includes(q));
+  if (q) {
+    filtered = filtered.filter(i => i.name.toLowerCase().includes(q));
+  }
 
   renderMenu(filtered);
 }
 
 // ============================
-// CARRITO
+// 9️⃣ CARRITO DE COMPRAS (ESTILO IMAGEN)
 // ============================
+
 function addToCart(id) {
   const item = menuData.find(i => i.id == id);
   const existing = cart.find(i => i.id == id);
@@ -153,15 +162,22 @@ function renderCart() {
     subtotal += item.price * item.quantity;
 
     const div = document.createElement("div");
-    div.className = "d-flex mb-3";
+    div.className = "d-flex mb-3 align-items-center";
 
     div.innerHTML = `
-      <img src="${item.img}" width="60">
+      <img src="${item.img}" width="60" class="rounded">
       <div class="ms-3 flex-grow-1">
         <strong>${item.name}</strong>
-        <div>$${(item.price * item.quantity / 100).toFixed(2)}</div>
+        <div class="text-muted">$${(item.price / 100).toFixed(2)}</div>
+        <div class="d-flex align-items-center gap-2 mt-1">
+          <button class="btn btn-outline-secondary btn-sm" onclick="changeQty(${item.id}, -1)">−</button>
+          <span>${item.quantity}</span>
+          <button class="btn btn-outline-secondary btn-sm" onclick="changeQty(${item.id}, 1)">+</button>
+        </div>
       </div>
+      <button class="btn btn-link text-danger ms-2" onclick="removeItem(${item.id})">Remove</button>
     `;
+
     orderItemsContainer.appendChild(div);
   });
 
@@ -171,12 +187,45 @@ function renderCart() {
   subtotalEl.textContent = `$${(subtotal / 100).toFixed(2)}`;
   taxEl.textContent = `$${(tax / 100).toFixed(2)}`;
   totalEl.textContent = `$${(total / 100).toFixed(2)}`;
-  orderCountBadge.textContent = cart.length;
+  orderCountBadge.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
 }
 
 // ============================
-// CONFIRMAR PEDIDO
+// 🔧 FUNCIONES DE CONTROL
 // ============================
+
+function changeQty(id, amount) {
+  const item = cart.find(i => i.id == id);
+  if (!item) return;
+
+  item.quantity += amount;
+
+  if (item.quantity <= 0) {
+    cart = cart.filter(i => i.id != id);
+  }
+
+  renderCart();
+}
+
+function removeItem(id) {
+  cart = cart.filter(i => i.id != id);
+  renderCart();
+}
+
+// ============================
+// 🗑️ VACIAR CARRITO
+// ============================
+
+clearOrderBtn.addEventListener("click", e => {
+  e.preventDefault();
+  cart = [];
+  renderCart();
+});
+
+// ============================
+// 🔟 CONFIRMAR PEDIDO
+// ============================
+
 confirmOrderBtn.addEventListener("click", async () => {
   if (!cart.length) return alert("Pedido vacío");
 
@@ -187,7 +236,7 @@ confirmOrderBtn.addEventListener("click", async () => {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      idUser: USER_ID,   // 👈 STRING "9a40"
+      idUser: USER_ID,
       products: cart,
       total,
       status: "pending"
@@ -199,6 +248,8 @@ confirmOrderBtn.addEventListener("click", async () => {
   alert("Pedido confirmado");
 });
 
-
 // ============================
+// 🚀 INICIO
+// ============================
+
 fetchMenu();
